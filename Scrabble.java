@@ -85,30 +85,34 @@ public class Scrabble {
     
         return false;
     }
-	// Returns the Scrabble score of the given word.
-	// If the length of the word equals the length of the hand, adds 50 points to the score.
-	// If the word includes the sequence "runi", adds 1000 points to the game.
+	
 	public static int wordScore(String word) {
 		int score = 0;
 		String checker = "runi";
-		if (word.length() == 10) {
-			score += 50;
-		}
+	
+		
 		if (word.contains(checker)) {
 			score += 1000;
 		}
-		word = word.toLowerCase(); 
+	
+	
+		if (word.length() == 10) {
+			score += 50;
+		}
+	
+		
 		for (int i = 0; i < word.length(); i++) {
 			char currentChar = word.charAt(i);
+	
+			
 			if (currentChar >= 'a' && currentChar <= 'z') {
 				int index = currentChar - 'a'; 
-				score += SCRABBLE_LETTER_VALUES[index];
+				score = score + SCRABBLE_LETTER_VALUES[index];
 			}
 		}
 	
 		return score;
 	}
-	
 	
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
 	// into it, at random indexes, the letters 'a' and 'e'
@@ -156,18 +160,19 @@ public class Scrabble {
 	
 	
 	public static String removeHandLetters(String hand, String other) {
-		String result = hand;
+		StringBuilder result = new StringBuilder(hand);
 	
 		for (int i = 0; i < other.length(); i++) {
 			char currentChar = other.charAt(i);
-			int index = result.indexOf(currentChar);
+			int index = result.indexOf(String.valueOf(currentChar));
 			if (index != -1) {
-				result = result.substring(0, index) + result.substring(index + 1);
+				result.deleteCharAt(index); 
 			}
 		}
 	
-		return result;
+		return result.toString();
 	}
+	
 	
     // Runs a single hand in a Scrabble game. Each time the user enters a valid word:
     // 1. The letters in the word are removed from the hand, which becomes smaller.
@@ -192,25 +197,25 @@ public class Scrabble {
 			for (int i = 0; i < DICTIONARY.length; i++) {
 				if (input.equals(DICTIONARY[i])) {
 					validWord = true;
-					hand = removeHandLetters(hand, input); 
+					hand = removeHandLetters(hand, input);
 					int wordPoints = wordScore(input);
-					score += wordPoints; 
+					score += wordPoints;
 					System.out.println(input + " earned " + wordPoints + " points. Total: " + score + " points.");
 					break;
 				}
 			}
-	
 			if (!validWord) {
 				System.out.println("Invalid word. Please try again.");
 			}
 		}
 	
 		if (hand.length() == 0) {
-			System.out.println("Ran out of letters. Total score: " + score + " points.");
+			System.out.println("Ran out of letters. Total score: " + score + " points");
 		} else {
-			System.out.println("End of hand. Total score: " + score + " points.");
+			System.out.println("End of hand. Total score: " + score + " points");
 		}
 	}
+	
 
 
 // Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
