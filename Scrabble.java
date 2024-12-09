@@ -189,12 +189,14 @@ public class Scrabble {
 					int wordPoints = wordScore(input);
 					score += wordPoints;
 					System.out.println("train earned " + wordPoints + " points. "  + "Score: " + score + " points" );
+					System.out.println();
 					break;
 				}
 			}
 	
 			if (!validWord) {
 				System.out.println("Invalid word. Try again.");
+				System.out.println();
 			}
 		}
 	
