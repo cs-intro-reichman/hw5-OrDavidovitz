@@ -109,6 +109,7 @@ public class Scrabble {
 		return score;
 	}
 	
+	
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
 	// into it, at random indexes, the letters 'a' and 'e'
 	// (these two vowels make it easier for the user to construct words)
@@ -185,29 +186,32 @@ public class Scrabble {
 			// end-of-line characters.
 			String input = in.readString();
 			if (input.equals(".")) {
-				break;}
-				boolean validWord = false;
-				for (int i = 0; i < DICTIONARY.length; i++) {
-					if (input.equals(DICTIONARY[i])) {
-						validWord = true;
-						hand = removeHandLetters(hand, input); 
-						score += wordScore(input); 
-						System.out.println(input + " earned " + wordScore(input) + " points. Total: " + score + " points.");
-						break;
-					}
-				}
-		
-				if (!validWord) {
-					System.out.println("Invalid word. Please try again.");
+				break;
+			}
+			boolean validWord = false;
+			for (int i = 0; i < DICTIONARY.length; i++) {
+				if (input.equals(DICTIONARY[i])) {
+					validWord = true;
+					hand = removeHandLetters(hand, input); 
+					int wordPoints = wordScore(input);
+					score += wordPoints; 
+					System.out.println(input + " earned " + wordPoints + " points. Total: " + score + " points.");
+					break;
 				}
 			}
-		
-			if (hand.length() == 0) {
-				System.out.println("Ran out of letters. Total score: " + score + " points.");
-			} else {
-				System.out.println("End of hand. Total score: " + score + " points.");
+	
+			if (!validWord) {
+				System.out.println("Invalid word. Please try again.");
 			}
 		}
+	
+		if (hand.length() == 0) {
+			System.out.println("Ran out of letters. Total score: " + score + " points.");
+		} else {
+			System.out.println("End of hand. Total score: " + score + " points.");
+		}
+	}
+
 
 // Plays a Scrabble game. Prompts the user to enter 'n' for playing a new hand, or 'e'
 // to end the game. If the user enters any other input, writes an error message.
