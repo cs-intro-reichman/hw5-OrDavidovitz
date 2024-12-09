@@ -74,13 +74,23 @@ public class MyString {
      * @return a string consisting of the characters of str, separated by spaces.
      */
     public static String spacedString(String str) {
-        String newStr = "" +str.charAt(0);
-        for (int i=1;i<str.length();i++)
-        {
-            newStr+=( " "  + str.charAt(i) );
+        String spaced = "";
+        if (str.length()<1) 
+            return spaced;
+            else{
+        
+        for (int i = 0; i < str.length(); i++) {
+            spaced += str.charAt(i);
+            if (i < str.length() - 1) {
+                spaced += " "; 
+            }
         }
-        return newStr;
+            }
+        return spaced;
     }
+    
+    
+    
   
     /**
      * Returns a string of n lowercase letters, selected randomly from 
@@ -112,15 +122,21 @@ public class MyString {
      * @param str2 - a string
      * @return a string consisting of str1 minus all the characters of str2
      */
-    public static String remove(String str1, String str2) {
-       if (str2=="")return str1;
-       String newStr =str1;
-       for (int i=0;i<str2.length();i++)
-       {
-        newStr = newStr.replace(Character.toString(str2.charAt(i)), "");
-       }
-        return newStr;
+    public static String remove(String hand, String other) {
+        String result = hand;
+    
+        for (int i = 0; i < other.length(); i++) {
+            char currentChar = other.charAt(i);
+            int index = result.indexOf(currentChar); 
+            if (index != -1) {
+                result = result.substring(0, index) + result.substring(index + 1); 
+            }
+        }
+    
+        return result;
     }
+    
+    
 
     /**
      * Returns a string consisting of the given string, with the given 

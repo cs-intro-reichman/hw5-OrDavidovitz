@@ -59,60 +59,48 @@ public class Scrabble {
 		}
 		return false;
 	}
-	public static boolean contains(String str1, String str2) {
-        if (str2.length() == 0) {
-            return true;
-        }
-        
-        if (str1.length() < str2.length()) {
-            return false;
-        }
-    
-        for (int i = 0; i <= str1.length() - str2.length(); i++) {
-            boolean found = true;
-    
-            for (int j = 0; j < str2.length(); j++) {
-                if (str1.charAt(i + j) != str2.charAt(j)) {
-                    found = false;
-                    break;
-                }
-            }
-    
-            if (found) {
-                return true;
-            }
-        }
-    
-        return false;
-    }
+	public static boolean containsAllCharacters(String word, String target) {
+		word = word.toLowerCase();
+		target = target.toLowerCase();
 	
-	public static int wordScore(String word) {
-		int score = 0;
-		String checker = "runi";
-	
-		
-		if (word.contains(checker)) {
-			score += 1000;
+		for (int i = 0; i < target.length(); i++) {
+			char currentChar = target.charAt(i);
+			if (!word.contains(String.valueOf(currentChar))) {
+				return false;
+			}
+			word = word.replaceFirst(String.valueOf(currentChar), "");
 		}
 	
+		return true;
+	}
+	public static int wordScore(String word) {
+		int score = 0;
 	
+		word = word.toLowerCase().trim();
+	
+		for (int i = 0; i < word.length(); i++) {
+			char currentChar = word.charAt(i);
+			if (currentChar >= 'a' && currentChar <= 'z') {
+				int index = currentChar - 'a';
+				score += SCRABBLE_LETTER_VALUES[index];
+			}
+		}
+	
+		
+	
+		score *= word.length();
+		if (containsAllCharacters(word, "runi")) {
+			score += 1000;
+		}
 		if (word.length() == 10) {
 			score += 50;
 		}
 	
-		
-		for (int i = 0; i < word.length(); i++) {
-			char currentChar = word.charAt(i);
-	
-			
-			if (currentChar >= 'a' && currentChar <= 'z') {
-				int index = currentChar - 'a'; 
-				score = score + SCRABBLE_LETTER_VALUES[index];
-			}
-		}
-	
 		return score;
 	}
+	
+	
+	
 	
 	// Creates a random hand of length (HAND_SIZE - 2) and then inserts
 	// into it, at random indexes, the letters 'a' and 'e'
@@ -160,18 +148,19 @@ public class Scrabble {
 	
 	
 	public static String removeHandLetters(String hand, String other) {
-		StringBuilder result = new StringBuilder(hand);
+		String result = hand; 
 	
 		for (int i = 0; i < other.length(); i++) {
-			char currentChar = other.charAt(i);
-			int index = result.indexOf(String.valueOf(currentChar));
+			char currentChar = other.charAt(i); 
+			int index = result.indexOf(currentChar); 
 			if (index != -1) {
-				result.deleteCharAt(index); 
+				result = result.substring(0, index) + result.substring(index + 1);
 			}
 		}
 	
-		return result.toString();
+		return result; 
 	}
+	
 	
 	
     // Runs a single hand in a Scrabble game. Each time the user enters a valid word:
