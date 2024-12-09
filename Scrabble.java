@@ -188,7 +188,7 @@ public class Scrabble {
 					hand = removeHandLetters(hand, input);
 					int wordPoints = wordScore(input);
 					score += wordPoints;
-					System.out.println(input + " -> score: " + score);
+					System.out.println("train earned " + wordPoints + " points. "  + "Score: " + score + " points" );
 					break;
 				}
 			}
