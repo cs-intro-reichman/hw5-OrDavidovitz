@@ -196,7 +196,6 @@ public class Scrabble {
 	
 			if (!validWord) {
 				System.out.println("Invalid word. Try again.");
-				System.out.println();
 			}
 		}
 	
