@@ -188,22 +188,23 @@ public class Scrabble {
 					hand = removeHandLetters(hand, input);
 					int wordPoints = wordScore(input);
 					score += wordPoints;
-					System.out.println(input + " earned " + wordPoints + " points. Total: " + score + " points.");
+					System.out.println(input + " earned " + wordPoints + " points. Score: " + score + " points");
 					break;
 				}
 			}
 	
 			if (!validWord) {
-				System.out.println("Invalid word. Please try again.");
+				System.out.println("Invalid word. Try again.");
 			}
 		}
 	
 		if (hand.length() == 0) {
-			System.out.println("Ran out of letters. Total score: " + score + " points.");
+			System.out.println("Ran out of letters. Total score: " + score + " points");
 		} else {
-			System.out.println("End of hand. Total score: " + score + " points.");
+			System.out.println("End of hand. Total score: " + score + " points");
 		}
 	}
+	
 	
 	
 
