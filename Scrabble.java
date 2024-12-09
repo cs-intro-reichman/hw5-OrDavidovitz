@@ -93,7 +93,7 @@ public class Scrabble {
 			score += 1000;
 		}
 		if (word.length() == 10) {
-			score += 50;
+			score = score + 50;
 		}
 	
 		return score;
@@ -188,13 +188,13 @@ public class Scrabble {
 					hand = removeHandLetters(hand, input);
 					int wordPoints = wordScore(input);
 					score += wordPoints;
-					System.out.println(input + " earned " + wordPoints + " points. Total: " + score + " points");
+					System.out.println(input + " -> score: " + score);
 					break;
 				}
 			}
 	
 			if (!validWord) {
-				System.out.println("Invalid word. Please try again.");
+				System.out.println("Invalid word. Try again.");
 			}
 		}
 	
